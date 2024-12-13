@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package contracts.ai.arena;
+
+import "aelf/options.proto";
+import "aelf/core.proto";
+import "aiarena_contract.proto";
+
+option csharp_namespace = "Ai.Arena";
+
+service AiArenaImpl {
+  option (aelf.csharp_state) = "Ai.Arena.AiArenaState";
+  option (aelf.base) = "aiarena_contract.proto";
+}

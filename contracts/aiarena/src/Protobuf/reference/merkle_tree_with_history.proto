@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package merkle_tree_with_history;
+
+import "aelf/options.proto";
+import "aelf/core.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+service MerkleTreeWithHistory {
+  // Create a new Merkle tree with history. Reverts if a tree with the same ID already exists.
+  rpc CreateTree(CreateTreeInput) returns (google.protobuf.Empty) {};
+  // Insert a leaf into the tree. Reverts if the tree does not exist or not the owner.
+  rpc InsertLeaf(InsertLeafInput) returns (google.protobuf.UInt32Value) {};
+  rpc HashLeftRight(HashLeftRightInput) returns (google.protobuf.BytesValue) {
+    option (aelf.is_view) = true;
+  };
+  rpc IsKnownRoot(IsKnownRootInput) returns (google.protobuf.BoolValue) {
+    option (aelf.is_view) = true;
+  };
+  rpc GetNextIndex(aelf.Hash) returns (google.protobuf.UInt32Value) {
+    option (aelf.is_view) = true;
+  };
+  rpc GetLastRoot(aelf.Hash) returns (aelf.Hash) {
+    option (aelf.is_view) = true;
+  };
+}
+
+message CreateTreeInput {
+  aelf.Hash tree_id = 1;
+  aelf.Address owner = 2;
+  uint32 levels = 3;
+}
+
+message HashLeftRightInput {
+  bytes left = 1;
+  bytes right = 2;
+}
+
+message InsertLeafInput {
+  aelf.Hash tree_id = 1;
+  bytes leaf = 2;
+}
+
+message IsKnownRootInput {
+  aelf.Hash tree_id = 1;
+  aelf.Hash root = 2;
+}

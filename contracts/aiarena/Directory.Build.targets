@@ -1,0 +1,7 @@
+<Project>
+    <Target Name="AddProtoGeneratedFiles" AfterTargets="CoreCompile">
+        <ItemGroup>
+            <Compile Include="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf/**/*.cs"/>
+        </ItemGroup>
+    </Target>
+</Project>

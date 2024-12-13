@@ -1,0 +1,30 @@
+<Project>
+
+    <ItemGroup>
+        <PbBase Include="../proto/base/*.proto">
+            <Link>Protobuf\base\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\base</OutputDir>
+        </PbBase>
+        <PbContract Include="../proto/contract/*.proto" Condition="'$(IsTestProject)' == ''">
+            <Link>Protobuf\contract\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\contract</OutputDir>
+        </PbContract>
+        <PbStub Include="../proto/contract/*.proto" Condition="'$(IsTestProject)' == 'true'">
+            <Link>Protobuf\stub\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\stub</OutputDir>
+        </PbStub>
+        <PbMessage Include="../proto/message/*.proto">
+            <Link>Protobuf\message\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\message</OutputDir>
+        </PbMessage>
+        <PbReference Include="../proto/reference/*.proto">
+            <Link>Protobuf\reference\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\reference</OutputDir>
+        </PbReference>
+        <PbStub Include="../proto/stub/*.proto">
+            <Link>Protobuf\stub\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <OutputDir>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)\__generated\Protobuf\stub</OutputDir>
+        </PbStub>
+    </ItemGroup>
+
+</Project>

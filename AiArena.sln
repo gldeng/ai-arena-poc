@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "contracts", "contracts", "{31D1E863-05B6-4CFB-B3B5-1D96308416EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aiarena", "aiarena", "{D8906CAF-12EC-4A12-9D22-707A568F2AF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiArena", "contracts\aiarena\src\AiArena.csproj", "{482C123C-8FF6-4289-A345-26CDABC53AC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiArena.Tests", "contracts\aiarena\test\AiArena.Tests.csproj", "{4CF413F5-0711-4EF4-AEF6-2FC1939792B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D8906CAF-12EC-4A12-9D22-707A568F2AF6} = {31D1E863-05B6-4CFB-B3B5-1D96308416EC}
+		{482C123C-8FF6-4289-A345-26CDABC53AC9} = {D8906CAF-12EC-4A12-9D22-707A568F2AF6}
+		{4CF413F5-0711-4EF4-AEF6-2FC1939792B6} = {D8906CAF-12EC-4A12-9D22-707A568F2AF6}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{482C123C-8FF6-4289-A345-26CDABC53AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482C123C-8FF6-4289-A345-26CDABC53AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482C123C-8FF6-4289-A345-26CDABC53AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482C123C-8FF6-4289-A345-26CDABC53AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF413F5-0711-4EF4-AEF6-2FC1939792B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF413F5-0711-4EF4-AEF6-2FC1939792B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF413F5-0711-4EF4-AEF6-2FC1939792B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF413F5-0711-4EF4-AEF6-2FC1939792B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

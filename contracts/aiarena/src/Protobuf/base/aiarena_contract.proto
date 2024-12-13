@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package contracts.ai.arena;
+
+import "aelf/options.proto";
+import "aelf/core.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service AiArena {
+  // ---- Initializer API ---
+  rpc Initialize(InitializeInput) returns (google.protobuf.Empty);
+
+  // ---- Race API ----
+  rpc CreateRace(Race) returns (google.protobuf.Empty);
+  rpc GetRace(aelf.Hash) returns (Race) {
+    option (aelf.is_view) = true;
+  };
+
+  // ---- User API ----
+  rpc Deposit(DepositInput) returns (google.protobuf.UInt32Value);
+  rpc Vote(VoteInput) returns (google.protobuf.UInt32Value);
+  rpc Redeem(RedeemInput) returns (google.protobuf.Empty);
+}
+
+// ======= Shared Messages =======
+message TokenAmount {
+  string symbol = 1;
+  int64 amount = 2;
+}
+
+message Race {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  repeated string symbols_of_participating_agents = 3; // ?? Is there any contracts registering AI Agents information ??
+  int64 amount_per_vote = 4;
+  int64 fee_per_vote = 5;
+}
+
+message G1Point {
+  string x = 1;
+  string y = 2;
+}
+
+message Fp2 {
+  string first = 1;
+  string second = 2;
+}
+
+message G2Point {
+  Fp2 x = 1;
+  Fp2 y = 2;
+}
+
+message Proof {
+  G1Point a = 1;
+  G2Point b = 2;
+  G1Point c = 3;
+}
+
+// ======= Input/Output Messages =======
+message InitializeInput {
+  aelf.Address merkle_tree_history_contract_address = 1;
+  aelf.Address zk_verifier_address = 2;
+}
+
+message DepositInput {
+  aelf.Hash race_id = 1;
+  aelf.Hash commitment = 2;
+}
+
+message VoteInput {
+  aelf.Hash race_id = 1;
+  aelf.Hash tree_root = 2;
+  // The nullifier for consuming the vote
+  aelf.Hash nullifier = 3;
+  aelf.Hash redemption_commitment = 4;
+  aelf.Hash hash_of_encrypted_vote = 5;
+  bytes encrypted_vote = 6;
+  // zk proof of the vote
+  Proof proof = 7;
+}
+
+message RedeemInput {
+  aelf.Hash race_id = 1;
+  aelf.Hash tree_root = 2;
+  // The nullifier for consuming the vote
+  aelf.Hash nullifier = 3;
+  aelf.Address recipient = 4;
+  // zk proof of the vote
+  Proof proof = 5;
+}
+
+// ======== Events =======
+message RaceCreated {
+  option (aelf.is_event) = true;
+  aelf.Hash race_hash = 1;
+  Race race = 2;
+}
+
+message Deposited {
+  option (aelf.is_event) = true;
+  aelf.Hash race_id = 1;
+  aelf.Hash commitment = 2;
+  uint32 leaf_index = 3;
+}
+
+message Voted {
+  option (aelf.is_event) = true;
+  aelf.Hash race_id = 1;
+  aelf.Hash redemption_commitment = 2;
+  uint32 leaf_index = 3;
+}
